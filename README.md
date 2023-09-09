@@ -8,11 +8,11 @@
 
 ![cloud-resume-challenge](assets/cloud-resume-challenge.png)
 
-> This Challenge Came Up With [Forrest Brazeal](https://forrestbrazeal.com/2020/04/23/the-cloud-resume-challenge/), and [Cloud Challenge Link](https://cloudresumechallenge.dev/docs/the-challenge/aws/).
+> This Challenge Came Up With [Forrest Brazeal](https://forrestbrazeal.com/2020/04/23/the-cloud-resume-challenge/) 
 
-In short , the conditions of the challenge look something like this**
+> At this project, we'll tackle all of these [Cloud Challenge](https://cloudresumechallenge.dev/docs/the-challenge/aws/). `all conditions are clickable`
 
-> At this project, we'll tackle all of these challenges. `all conditions are clickable`
+![Cloud Resume Architecture Diagram](assets/cloud-resume-arch.png)
 
 ## Challenges
 
@@ -50,7 +50,7 @@ For my website I personally used [HTML5 UP](https://html5up.net/) template.
 
 * Download template from [This site](https://html5up.net/).
 
-* Change and Correct code for your site using some IDE.
+* Build your website using some IDE, I personally used [SDE gitpod.io](https://gitpod.io).
 
 * Zip the project code of your website for use in `AWS S3` .
 
