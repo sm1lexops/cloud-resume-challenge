@@ -3,13 +3,19 @@
 
 ![cloud-resume-challenge](assets/cloud-resume-challenge.png)
 
+- [Beginning](#cloud-project-for-developing-and-hosting-your-resume)
+
+- [Challenges](#challenges)
+
 > This Challenge Came Up With [Forrest Brazeal](https://forrestbrazeal.com/2020/04/23/the-cloud-resume-challenge/)
 
-**In short , the conditions of the challenge look something like this**
+In short , the conditions of the challenge look something like this**
 
-> At this project, we'll tackle all of these challenges.
+> At this project, we'll tackle all of these challenges. `all conditions are clickable`
 
-1. **Resume Format**: Your resume should be in HTML format, not a Word document or PDF. Here's an example of the desired format.
+## Challenges
+
+1. [**Resume Format**](#resume-html5-and-css-format): Your resume should be in HTML format, not a Word document or PDF. Here's an example of the desired format.
 
 2. **Styling**: Use CSS to style your HTML resume. It doesn't need to be overly fancy, but it should look more than just plain HTML.
 
@@ -36,3 +42,15 @@
 13. **Blog Post**: Include a link in your resume to a brief blog post describing what you learned during this project. Dev.to is a great platform for publishing if you don't have your blog.
 
 14. **Completion**: Once you've completed all these steps, add my GitHub username (@forrestbrazeal) as a collaborator on your repositories. If you meet the conditions mentioned above, I'll provide a personalized code review and help promote your work.
+
+## Resume HTML5 and CSS Format
+
+For my website I personally used [HTML5 UP](https://html5up.net/) template.
+
+* Download template from [This site](https://html5up.net/).
+
+* Change and Correct code for your site using some IDE.
+
+* Zip the project code of your website for use in `AWS S3` .
+
+> You can see my [Commit Example #1]() [Commit Example #2]
