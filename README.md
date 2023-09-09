@@ -53,4 +53,13 @@ For my website I personally used [HTML5 UP](https://html5up.net/) template.
 
 * Zip the project code of your website for use in `AWS S3` .
 
-> You can see my [Commit Example #1]() [Commit Example #2]
+> You can look at my sample code 
+
+* [Commit Example #1]()
+
+> Template 
+
+![Template1](assets/template1.png)
+
+* [Commit Example #2]()
+
