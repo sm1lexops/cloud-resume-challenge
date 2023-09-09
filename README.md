@@ -1,2 +1,2 @@
 # cloud-resume-challenge
-Cloud project with develop and hosting yours resume
+## *"Cloud project for developing and hosting your resume."*
