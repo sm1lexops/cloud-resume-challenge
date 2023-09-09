@@ -1,13 +1,14 @@
 # Cloud-resume-challenge
-## *"Cloud project for developing and hosting your resume."*
-
-![cloud-resume-challenge](assets/cloud-resume-challenge.png)
 
 - [Beginning](#cloud-project-for-developing-and-hosting-your-resume)
 
 - [Challenges](#challenges)
+- 
+## *"Cloud project for developing and hosting your resume."*
 
-> This Challenge Came Up With [Forrest Brazeal](https://forrestbrazeal.com/2020/04/23/the-cloud-resume-challenge/)
+![cloud-resume-challenge](assets/cloud-resume-challenge.png)
+
+> This Challenge Came Up With [Forrest Brazeal](https://forrestbrazeal.com/2020/04/23/the-cloud-resume-challenge/), and [Cloud Challenge Link](https://cloudresumechallenge.dev/docs/the-challenge/aws/).
 
 In short , the conditions of the challenge look something like this**
 
