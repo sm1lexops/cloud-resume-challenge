@@ -8,11 +8,24 @@
 
 ![cloud-resume-challenge](assets/cloud-resume-challenge.png)
 
-> This Challenge Came Up With [Forrest Brazeal](https://forrestbrazeal.com/2020/04/23/the-cloud-resume-challenge/) 
+This Challenge Came Up With [Forrest Brazeal](https://forrestbrazeal.com/2020/04/23/the-cloud-resume-challenge/) 
 
-> At this project, we'll tackle all of these [Cloud Challenge](https://cloudresumechallenge.dev/docs/the-challenge/aws/). `all conditions are clickable`
+At this project, we'll tackle all of these [Cloud Challenge](https://cloudresumechallenge.dev/docs/the-challenge/aws/). `all conditions are clickable`
+
+ *In this project, I will attempt to describe how to create a static S3 website for your resume, dividing it into two (maybe 3) steps:*
+
+    - Step 1: Using AWS Management Console without load balancer
+    - Step 2: Using Terraform as IaC with ALB
+    - (Maybe)Step 3: Using SDKs
+    - Step 4: Improving Later...
+
+> First Diagramm for Step 1
 
 ![Cloud Resume Architecture Diagram](assets/cloud-resume-arch.png)
+
+
+
+> Our Initial Step 1 Diagramm
 
 ## Challenges
 
