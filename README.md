@@ -1,16 +1,26 @@
-# Cloud-resume-challenge
+# Cloud Resume Challenge
 
-- [Beginning](#cloud-project-for-developing-and-hosting-your-resume)
-
-- [Challenges](#challenges)
-- 
+- [Cloud Resume Challenge](#cloud-resume-challenge)
+  * [*"Cloud project for developing and hosting your resume."*](#--cloud-project-for-developing-and-hosting-your-resume--)
+  * [Challenges](#challenges)
+  * [Preparation](#preparation)
+  
 ## *"Cloud project for developing and hosting your resume."*
 
 ![cloud-resume-challenge](assets/cloud-resume-challenge.png)
 
-> This Challenge Came Up With [Forrest Brazeal](https://forrestbrazeal.com/2020/04/23/the-cloud-resume-challenge/) 
+This Challenge Came Up With [Forrest Brazeal](https://forrestbrazeal.com/2020/04/23/the-cloud-resume-challenge/) 
 
-> At this project, we'll tackle all of these [Cloud Challenge](https://cloudresumechallenge.dev/docs/the-challenge/aws/). `all conditions are clickable`
+At this project, we'll tackle all of these [Cloud Challenge](https://cloudresumechallenge.dev/docs/the-challenge/aws/). `all conditions are clickable`
+
+ *In this project, I will attempt to describe how to create a static S3 website for your resume, dividing it into two (maybe 3) steps:*
+
+    - Step 1: Using AWS Management Console without load balancer
+    - Step 2: Using Terraform as IaC with ALB
+    - (Maybe)Step 3: Using SDKs
+    - Step 4: Improving Later...
+
+> Diagramm for Step 1 part
 
 ![Cloud Resume Architecture Diagram](assets/cloud-resume-arch.png)
 
@@ -44,7 +54,49 @@
 
 14. **Completion**: Once you've completed all these steps, add my GitHub username (@forrestbrazeal) as a collaborator on your repositories. If you meet the conditions mentioned above, I'll provide a personalized code review and help promote your work.
 
-## Resume HTML5 and CSS Format
+## Preparation
+
+*For training we try to use git flow branching without dev env (master branch with features branching)*
+
+1. Create [github](ttps://github.com) code repo for our project
+
+2. I'm using [`gitpod`](https://www.gitpod.io/) CDEs - pre-configured with your tools and dependencies for writing, testing and reviewing code.
+
+* Run your project repo on `gitpod` environment
+
+* Create `gitpod.yml` in the root project directory
+
+3. For reviewing our website install on `gitpod` [http-server: a simple static HTTP server](https://www.npmjs.com/package/http-server)
+
+4. Install AWS CLI 
+
+> To automate our gitpod environment add next to `gitpod.yml`
+
+```yml
+tasks:
+  - name: aws-cli
+    env:
+      AWS_CLI_AUTO_PROMPT: on-partial
+    before: |
+      cd $THEIA_WORKSPACE_ROOT
+      curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+      unzip awscliv2.zip
+      sudo ./aws/install
+      rm -Rf aws*
+  - name: http-server
+    before: |
+      cd $THEIA_WORKSPACE_ROOT
+      npm install --global http-server
+    command: 
+      http-server
+# aws cli for macos
+      #curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
+      #sudo installer -pkg AWSCLIV2.pkg -target /
+vscode:
+  extensions:
+    - amazonwebservices.aws-toolkit-vscode
+```
+5. Download Website Template into the repo 
 
 For my website I personally used [HTML5 UP](https://html5up.net/) template.
 
@@ -52,15 +104,17 @@ For my website I personally used [HTML5 UP](https://html5up.net/) template.
 
 * Build your website using some IDE, I personally used [SDE gitpod.io](https://gitpod.io).
 
+6. When finished create initial website 
+
 * Zip the project code of your website for use in `AWS S3` .
 
-> You can look at my sample code 
+> My template website code 
 
-* [Commit Example #1]()
+* [Template Website Example]()
 
 > Template 
 
 ![Template1](assets/template1.png)
 
-* [Commit Example #2]()
+* [Resulting Website (working for improve...)]()
 
