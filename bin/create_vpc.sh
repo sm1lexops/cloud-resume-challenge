@@ -1,3 +1,6 @@
+#############################################################################
+###         CREATE VPC, Subnets, Route Table
+#############################################################################
 #! /usr/bin/env bash
 set -e
 # Regular Colors
@@ -22,12 +25,11 @@ LABEL1_2="Error: Entered CIDR block is not in the correct IPv4 CIDR format (e.g.
 LABEL2="Enter IGW name (e.g., s3-igw): "
 LABEL2_1="IGW created successfully and attached to the VPC IGW: !"
 LABEL2_2="Error: igw can't be created, see logs"
-LABEL3="ENV AWS_ACCESS_KEY_ID is not set" 
-LABEL3_1="Input AWS_ACCESS_KEY_ID ENV Value: "
-LABEL3_2=" Value: ENV VAR AWS_ACCESS_KEY_ID is EMPTY "
-LABEL4="ENV AWS_SECRET_ACCESS_KEY is not set" 
-LABEL4_1="Input AWS_SECRET_ACCESS_KEY ENV Value: "
-LABEL4_2=" Value: ENV VAR AWS_SECRET_ACCESS_KEY is EMPTY "
+LABEL3="Enter Public Subnet CIDR block (e.g., 10.0.1.0/24 should be included into VPC CIDR): " 
+LABEL3_1="Enter Private Subnet CIDR block (e.g., 10.0.2.0/24 should be included into VPC CIDR): "
+LABEL4=" Public Subnet created successfully! "
+LABEL4_1=" Private Subnet created successfully!"
+LABEL4_2=" Route Table created and public subnet associated successfully! "
 
 #############################################################################
 ###         VPC
@@ -70,22 +72,47 @@ else
     printf "${RED}==== ${LABEL2_2}${NO_COLOR} ${RED}======${NO_COLOR}\n"
     exit 1
 fi
+#############################################################################
+###         Subnets and Route Table
+#############################################################################
+printf "${CYAN}==== ${LABEL3}${NO_COLOR} ${CYAN}======${NO_COLOR}\n"
+read -p "public_subnet_cidr: " public_subnet_cidr
 
-#read -p "Enter Public Subnet CIDR block (e.g., 10.0.1.0/24): " public_subnet_cidr
-#
-#printf "${CYAN}==== ${LABEL3}${NO_COLOR} ${CYAN}======${NO_COLOR}\n"
-#read -p "Enter Private Subnet CIDR block (e.g., 10.0.2.0/24): " private_subnet_cidr
-#
-#printf "${CYAN}==== ${LABEL4}${NO_COLOR} ${CYAN}======${NO_COLOR}\n"
-#read -p "Enter AWS region (e.g., us-east-1): " aws_region
-#
-#
-## Create Internet Gateway
-#internet_gateway_id=$(aws ec2 create-internet-gateway --query 'InternetGateway.InternetGatewayId' --output text)
-#
-## Add Name tag to the Internet Gateway
-#aws ec2 create-tags --resources "$internet_gateway_id" --tags Key=Name,Value=MyInternetGateway
-#
-## Attach Internet Gateway to the VPC
-#aws ec2 attach-internet-gateway --vpc-id "$vpc_id" --internet-gateway-id "$internet_gateway_id"
-#
+printf "${CYAN}==== ${LABEL3_1}${NO_COLOR} ${CYAN}======${NO_COLOR}\n"
+read -p "private_subnet_cidr: " private_subnet_cidr
+
+# Create Public Subnet
+public_subnet_id=$(aws ec2 create-subnet --vpc-id "$vpc_id" --cidr-block "$public_subnet_cidr" --availability-zone "${aws_region}a" --query 'Subnet.SubnetId' --output text)
+
+# Add Name tag to the Public Subnet
+aws ec2 create-tags --resources "$public_subnet_id" --tags Key=Name,Value=PublicSubnet
+printf "${CYAN}==== ${LABEL4}${NO_COLOR} ${CYAN}======${NO_COLOR}\n"
+# Create Private Subnet
+private_subnet_id=$(aws ec2 create-subnet --vpc-id "$vpc_id" --cidr-block "$private_subnet_cidr" --availability-zone "${aws_region}b" --query 'Subnet.SubnetId' --output text)
+
+# Add Name tag to the Private Subnet
+aws ec2 create-tags --resources "$private_subnet_id" --tags Key=Name,Value=PrivateSubnet
+printf "${CYAN}==== ${LABEL4_1}${NO_COLOR} ${CYAN}======${NO_COLOR}\n"
+# Create Route Table
+route_table_id=$(aws ec2 create-route-table --vpc-id "$vpc_id" --query 'RouteTable.RouteTableId' --output text)
+
+# Add Name tag to the Route Table
+aws ec2 create-tags --resources "$route_table_id" --tags Key=Name,Value=MyRouteTable
+printf "${CYAN}==== ${LABEL4_2}${NO_COLOR} ${CYAN}======${NO_COLOR}\n"
+# Create a default route to the Internet Gateway in the Route Table
+aws ec2 create-route --route-table-id "$route_table_id" --destination-cidr-block 0.0.0.0/0 --gateway-id "$internet_gateway_id"
+
+# Associate the Public Subnet with the Route Table
+aws ec2 associate-route-table --subnet-id "$public_subnet_id" --route-table-id "$route_table_id"
+
+export LABEL5=$(cat <<EOF
+Created Successfully:
+VPC: $vpc_id
+IGW: $internet_gateway_id
+public_subnet: $public_subnet_id $public_subnet_cidr
+private_subnet: $private_subnet_id $private_subnet_cidr
+route-table: $route_table_id
+Public Subnet have access to the Internet with Route to IGW
+EOF
+) 
+printf "${GREEN}==== ${LABEL5}${NO_COLOR} ${GREEN}======${NO_COLOR}\n"
