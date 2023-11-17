@@ -18,7 +18,7 @@ At this project, we'll tackle all of these [Cloud Challenge](https://cloudresume
     - Step 1: Using AWS Management Console without load balancer
     - Step 2: Using Terraform as IaC with ALB
     - (Maybe)Step 3: Using SDKs
-    - Step 4: Improving Later...
+    - Step n: Improving (monitoring, HA, CloudWatch event bus-> Lambda -> SNS Later...)
 
 > Diagramm for Step 1 part
 
