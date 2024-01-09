@@ -1,0 +1,1 @@
+# HTML5 Template for Cloud Resume Chellenge by Aleksey Smirnov @smi1lexops
