@@ -1,7 +1,10 @@
 # Chapter 1: Create a project with AWS Management Console
 
-
-
+- [Chapter 1: Create a project with AWS Management Console](#chapter-1--create-a-project-with-aws-management-console)
+  * [Step 1: Domain Configuration and SSL Certificates](#step-1--domain-configuration-and-ssl-certificates)
+  * [Step 2: Setting Up AWS S3 Bucket and Deploy Your Website](#step-2--setting-up-aws-s3-bucket-and-deploy-your-website)
+  * [Step 3: Setting Up AWS CloudFront](#step-3--setting-up-aws-cloudfront)
+  * [Step 4: Setting Up Route53](#step-4--setting-up-route53)
 
 ## Step 1: Domain Configuration and SSL Certificates
 
