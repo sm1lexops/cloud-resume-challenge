@@ -1,26 +1,24 @@
-# Cloud Resume Challenge
+# Cloud Resume Challenge Project
 
-- [Cloud Resume Challenge](#cloud-resume-challenge)
-  * [*"Cloud project for developing and hosting your resume."*](#--cloud-project-for-developing-and-hosting-your-resume--)
+- [Cloud Resume Challenge Project](#cloud-resume-challenge-project)
   * [Challenges](#challenges)
   * [Preparation](#preparation)
-  
-## *"Cloud project for developing and hosting your resume."*
+  * [Chapter 1: Create a resume project with AWS Management Console](#chapter-1-create-a-project-with-aws-management-console)
 
 ![cloud-resume-challenge](assets/cloud-resume-challenge.png)
 
-This Challenge Came Up With [Forrest Brazeal](https://forrestbrazeal.com/2020/04/23/the-cloud-resume-challenge/) 
+This Challenge came Up with [Forrest Brazeal](https://forrestbrazeal.com/2020/04/23/the-cloud-resume-challenge/) 
 
-At this project, we'll tackle all of these [Cloud Challenge](https://cloudresumechallenge.dev/docs/the-challenge/aws/). `all conditions are clickable`
+At this project, we'll tackle all of these [Cloud Challenge](https://cloudresumechallenge.dev/docs/the-challenge/aws/) (`all conditions are clickable`).
 
- *In this project, I will attempt to describe how to create a static S3 website for your resume, dividing it into two (maybe 3) steps:*
+ *In this project, I will attempt to describe how to create a static S3 website for your resume, dividing it into two (maybe 4) Chapters:*
 
-    - Step 1: Using AWS Management Console without load balancer
-    - Step 2: Using Terraform as IaC with ALB
-    - (Maybe)Step 3: Using SDKs
-    - Step n: Improving (monitoring, HA, CloudWatch event bus-> Lambda -> SNS Later...)
+    - Chapter 1: Create a project with AWS Management Console 
+    - Chapter 2: Define all project resource in an AWS SAM (IaC)
+    - Chapter 3: Terraform as IaC
+    - Chapter n: Improving (API Gateway, ALB, monitoring, HA, CloudWatch event bus-> Lambda -> SNS Later...)
 
-> Diagramm for Step 1 part
+> Our cloud resume project diagramm
 
 ![Cloud Resume Architecture Diagram](assets/cloud-resume-arch.png)
 
@@ -58,17 +56,24 @@ At this project, we'll tackle all of these [Cloud Challenge](https://cloudresume
 
 *For training we try to use git flow branching without dev env (master branch with features branching)*
 
-1. Create [github](ttps://github.com) code repo for our project
+1. You need to have `AWS` and `Github` accounts or create them [github](https://github.com) code repo for our project, [AWS registration](https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct&src=header_signup)
 
 2. I'm using [`gitpod`](https://www.gitpod.io/) CDEs - pre-configured with your tools and dependencies for writing, testing and reviewing code.
 
-* Run your project repo on `gitpod` environment
+* Run your project repo on IDE environment
 
 * Create `gitpod.yml` in the root project directory
 
-3. For reviewing our website install on `gitpod` [http-server: a simple static HTTP server](https://www.npmjs.com/package/http-server)
+3. For reviewing our website install on `gitpod` or your IDE [http-server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
 
 4. Install AWS CLI 
+
+```sh
+  cd $THEIA_WORKSPACE_ROOT
+  curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+  unzip awscliv2.zip
+  sudo ./aws/install
+```
 
 > To automate our gitpod environment add next to `gitpod.yml`
 
@@ -83,12 +88,6 @@ tasks:
       unzip awscliv2.zip
       sudo ./aws/install
       rm -Rf aws*
-  - name: http-server
-    before: |
-      cd $THEIA_WORKSPACE_ROOT
-      npm install --global http-server
-    command: 
-      http-server
 # aws cli for macos
       #curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
       #sudo installer -pkg AWSCLIV2.pkg -target /
@@ -102,19 +101,16 @@ For my website I personally used [HTML5 UP](https://html5up.net/) template.
 
 * Download template from [This site](https://html5up.net/).
 
-* Build your website using some IDE, I personally used [SDE gitpod.io](https://gitpod.io).
+* Build your website using some IDE
 
-6. When finished create initial website 
+6. When finished we'll explain hot to download your website template to AWS s3 bucket
 
-* Zip the project code of your website for use in `AWS S3` .
+* Zip the project code of your website for use in `AWS S3`.
 
-> My template website code 
+> Completed Web Project [thevopz.com](https://thevopz.com)
 
-* [Template Website Example]()
+![Template1](assets/thevopz.jpg)
 
-> Template 
+`Are you interested in this? :) Let's get down to writing your cloud resume.`
 
-![Template1](assets/template1.png)
-
-* [Resulting Website (working for improve...)]()
-
+### [Chapter 1: Create a project with AWS Management Console](info/chapter_1.md)
