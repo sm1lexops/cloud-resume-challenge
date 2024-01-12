@@ -266,4 +266,91 @@ In the next step, we will configure a CI/CD workflow to automate these processes
 
 ## Step 7: Configure CI/CD Workflow
 
+### Sync Local Files with Github
 
+1. Create a Github repository for your website source code
+
+![github repo](../assets/chapter1/github_repo.jpg)
+
+2. Push your source code to the repo
+
+- Initialize a Git repository in your local project folder.
+ ```sh
+ git init
+ ```
+
+- Include all files in your project folder in the Git repository.
+```sh
+git add
+``` 
+
+- Commit the changes along with a descriptive message.
+```sh
+git commit -m "Initial commit"
+```
+
+- Establish the remote repository URL
+```sh
+git remote add origin <repository_url>
+# where <repository_url> represents the URL of your GitHub repository.
+```
+- Finally, push the local files to the remote repository
+```sh
+git push origin master
+```
+
+### Configure Github Actions
+
+We aim to streamline the process of updating our website code, ensuring that modifications made locally are seamlessly reflected on our live website. By pushing these changes to GitHub, our CI/CD process will automatically upload the files to AWS S3 Bucket, facilitating dynamic updates on the website and invalidate our CloudFront distribution cache.
+
+1. Return to your website source code and establish a new directory named `.github/workflows` in the root folder. Inside this directory, create a YAML file named `cicd.yml` to house the GitHub Action configuration. Insert the following code snippet into the `cicd.yml` file
+
+```yml
+name: Upload Website
+
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - uses: jakejarvis/s3-sync-action@master
+      with:
+        args: --follow-symlinks --delete
+      env:
+        AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: ${{ secrets.AWS_REGION }}   # optional: defaults to us-east-1
+        #SOURCE_DIR: ''      # optional: defaults to entire repository
+
+# When s3 bucket files updated, we need to invalidate our CloudFront distribution cache  
+    - name: invalidate
+      uses: chetan/invalidate-cloudfront-action@v2
+      env:
+        PATHS: "/index.html /assets/css/main.css" # files that you want to invalidate cache
+        AWS_REGION: ${{ secrets.AWS_REGION }}
+        DISTRIBUTION: ${{ secrets.DISTRIBUTION }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+```
+
+> Source code for `cicd.yml` file 
+
+* [AWS S3 Sync Actions](https://github.com/jakejarvis/s3-sync-action)
+
+* [AWS CloudFront invalidation Actions](https://github.com/marketplace/actions/invalidate-aws-cloudfront)
+
+2. Add secrets ENV VAR for Github Actions
+
+* Navigate to your GitHub repository `settings`.
+* On the left sidebar, click on `Secrets and variables`.
+* Click <button name="button">New repository secret</button>
+
+Create ALL ENV VAR for the secret, such as `AWS_S3_BUCKET` // `AWS_ACCESS_KEY_ID` // `AWS_SECRET_ACCESS_KEY` // `AWS_REGION` // `AWS_S3_BUCKET`.
+
+![github secrets](../assets/chapter1/github_secrets.jpg)
