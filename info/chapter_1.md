@@ -354,3 +354,11 @@ jobs:
 Create ALL ENV VAR for the secret, such as `AWS_S3_BUCKET` // `AWS_ACCESS_KEY_ID` // `AWS_SECRET_ACCESS_KEY` // `AWS_REGION` // `AWS_S3_BUCKET`.
 
 ![github secrets](../assets/chapter1/github_secrets.jpg)
+
+3. To test CI/CD Github Actions, push changes to your remote github repo
+
+> You must achive a successful execution
+
+![github actions](../assets/chapter1/github_actions.png)
+
+**Well Done, you did a great job!**
