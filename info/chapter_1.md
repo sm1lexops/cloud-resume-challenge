@@ -126,3 +126,144 @@ For use custom domain name in your browser we should create `A` records type wit
 ![finall route53](../assets/chapter1/finall_route53.jpg)
 
 **Tell your neighbors send a link to your friends now you're on the World Wide Web:)**
+
+## Step 5: Setting Up Lambda and DynamoDB
+
+Now we are set to enhance our project by implementing crucial improvements and addressing conditions 7 to 11 in our Cloud Resume Challenge.
+
+* Our resume webpage should include a visitor counter that displays how many people have accessed the site. We will need to write a bit of Javascript to make this happen.
+
+* We will retrieve the visitor counter and update its count in a DynamoDB database using a Lambda function written in Python code.
+
+### Create DynamoDB Table
+
+1. Navigate in the AWS Management Console `DynamoDB` on the main **Dashboard** click <button name="button">Create table</button>
+
+2. Fill in the *Table name* `<your table name>`, next fill to *Partition key* field name `id`, next fields leave as default 
+
+![db table](../assets/chapter1/dbtable.jpg)
+
+3. Next click <button name="button">Explore table items</button>, you should creat <button name="button">Create item</button>, fill `views` value for `id` and create new **Attribute** *number* like in the picture
+
+![table item](../assets/chapter1/db_item.jpg)
+
+> You should have something like this
+
+![db created table](../assets/chapter1/db_created_item.jpg)
+
+### Configure Lambda function
+
+1. Navigate in the AWS Management Console `Lambda` click <button name="button">Create function</button>
+
+Fill fields:
+
+* **Function name** `<your name>`
+
+* **Runtime** choose lattest supported `Python`
+
+* **Architecture** `x86_64`
+
+* In **Advanced settings** enable - [x] `Enable function URL`, choose **Auth type** `NONE`, **Invoke mode** `BUFFERED(default)` and enable CORS - [x] `Configure cross-origin resource sharing (CORS)`
+
+* Click <button name="button">Create function</button>
+
+2. Add Python code to your lambda function
+
+```py
+#This section imports necessary libraries, including json and boto3 for working with AWS services.
+import json
+import boto3
+
+#Here, an instance of the DynamoDB resource and a reference to the '<your dynamodb table name>' table are created.
+dynamodb = boto3.resource('dynamodb')
+table = dynamodb.Table('<your dynamodb table name>')
+
+#The Lambda function is triggered with an event and context.
+def lambda_handler(event, context):
+    #The subsequent code is wrapped in a try-except block to catch and handle any exceptions that might occur during execution.
+    try:
+        # Retrieve current views
+        response = table.get_item(Key={'id': 'number'})
+        views = response.get('Item', {}).get('views', 0)
+
+        # Increment views count
+        views += 1
+        print(f"Updated views: {views}")
+
+        # Update DynamoDB with new views count
+        response = table.put_item(Item={'id': 'number', 'views': views})
+
+        return views
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        raise
+```
+
+3. Configure CORS settings, as illustrated in the image, to enhance security. To restrict calls to your Lambda function solely from `<your domain name>`, ensure proper CORS configuration.
+
+![lambda cors](../assets/chapter1/lambda_cors.jpg)
+
+4. In the same window copy Lambda **Function URL** to notepad for the next javascript code
+
+
+## Step 6: Configure Visitor Counter Code
+
+1. Create `index.js` file and add javascript code to this file
+
+```js
+//This line selects the HTML element with the class name "counter-number" and assigns it to the variable counter. This element is likely intended to display the view count.
+const counter = document.querySelector(".counter-number");
+
+//The code defines an asynchronous function named updateCounter. The async keyword is used to indicate that this function will perform asynchronous operations.
+async function updateCounter() {
+    try {
+        //The code fetches data from a Lambda function using the fetch API. If the response status is not okay (not in the range 200-299), it throws an error.
+        const response = await fetch("Your-LambdaFunction-URL");
+        
+        if (!response.ok) {
+            throw new Error(`Failed to fetch data. Status: ${response.status}`);
+        }
+        //If the fetch is successful, it parses the JSON response and updates the content of the counter element with the retrieved data.
+        const data = await response.json();
+        counter.innerHTML = `This page has ${data} Views!`;
+
+    } catch (error) {
+        console.error(`An error occurred: ${error.message}`);
+        // Handle error gracefully, e.g., show a fallback message or log the error
+    }
+}
+//Finally, the updateCounter function is invoked, initiating the process of fetching data and updating the view count on the web page.
+updateCounter();
+```
+
+2. Add reference to your `index.js` file in `index.html` file
+
+```html
+  <script src="/path/to/index.js"></script>
+```
+
+3. Add the `counter-number` class to the html code element of your web page
+
+> for example
+
+```html
+<div class="counter-number"></div>
+```
+
+If you have already downloaded your source code to the S3 bucket, delete the modified 'index.html' file from the bucket and download the new file to update your website.
+* In navigation pane AWS Management Console find *CloudFront*, go to the *distribution*
+
+* Click <button name="button">Invalidation</button> tab
+
+* Then <button name="button">Create invalidation</button> tab
+
+* *Add object paths* paste `/index.html`  click <button name="button">Create invalidation</button>
+
+*Your website will be updated and you should see visitor counter number*
+
+In the next step, we will configure a CI/CD workflow to automate these processes.
+
+## Step 7: Configure CI/CD Workflow
+
+
