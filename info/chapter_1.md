@@ -369,3 +369,5 @@ Create ALL ENV VAR for the secret, such as `AWS_S3_BUCKET` // `AWS_ACCESS_KEY_ID
 ![github actions](../assets/chapter1/github_actions.png)
 
 **Well Done, you did a great job!**
+
+In the upcoming Chapter 2, we will enhance our project using Infrastructure as Code (IaC).

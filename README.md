@@ -4,7 +4,8 @@
   * [Challenges](#challenges)
   * [Preparation](#preparation)
   * [Chapter 1: Create a resume project with AWS Management Console](#chapter-1-create-a-project-with-aws-management-console)
-
+  * [Chapter 2: Will be soon ...](#chapter-2-enhance-resume-cloud-project-using-infrastructure-as-code)
+  
 ![cloud-resume-challenge](assets/cloud-resume-challenge.png)
 
 This Challenge came Up with [Forrest Brazeal](https://forrestbrazeal.com/2020/04/23/the-cloud-resume-challenge/) 
@@ -14,7 +15,7 @@ At this project, we'll tackle all of these [Cloud Challenge](https://cloudresume
  *In this project, I will attempt to describe how to create a static S3 website for your resume, dividing it into two (maybe 4) Chapters:*
 
     - Chapter 1: Create a project with AWS Management Console 
-    - Chapter 2: Define all project resource in an AWS SAM (IaC)
+    - Chapter 2: Define all project resource in an AWS SAM (IaC) - (Will be soon...)
     - Chapter 3: Terraform as IaC
     - Chapter n: Improving (API Gateway, ALB, monitoring, HA, CloudWatch event bus-> Lambda -> SNS Later...)
 
@@ -114,3 +115,5 @@ For my website I personally used [HTML5 UP](https://html5up.net/) template.
 `Are you interested in this? :) Let's get down to writing your cloud resume.`
 
 ### [Chapter 1: Create a project with AWS Management Console](info/chapter_1.md)
+
+### [Chapter 2: Enhance Resume Cloud Project Using Infrastructure as Code](info/chapter_2.md)
