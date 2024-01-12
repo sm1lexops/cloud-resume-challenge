@@ -5,6 +5,13 @@
   * [Step 2: Setting Up AWS S3 Bucket and Deploy Your Website](#step-2--setting-up-aws-s3-bucket-and-deploy-your-website)
   * [Step 3: Setting Up AWS CloudFront](#step-3--setting-up-aws-cloudfront)
   * [Step 4: Setting Up Route53](#step-4--setting-up-route53)
+  * [Step 5: Setting Up Lambda and DynamoDB](#step-5--setting-up-lambda-and-dynamodb)
+    + [Create DynamoDB Table](#create-dynamodb-table)
+    + [Configure Lambda function](#configure-lambda-function)
+  * [Step 6: Configure Visitor Counter Code](#step-6--configure-visitor-counter-code)
+  * [Step 7: Configure CI/CD Workflow](#step-7--configure-ci-cd-workflow)
+    + [Sync Local Files with Github](#sync-local-files-with-github)
+    + [Configure Github Actions](#configure-github-actions)
 
 ## Step 1: Domain Configuration and SSL Certificates
 
