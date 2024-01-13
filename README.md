@@ -3,8 +3,8 @@
 - [Cloud Resume Challenge Project](#cloud-resume-challenge-project)
   * [Challenges](#challenges)
   * [Preparation](#preparation)
-  * [Chapter 1: Create a resume project with AWS Management Console](#chapter-1-create-a-project-with-aws-management-console)
-  * [Chapter 2: Will be soon ...](#chapter-2-enhance-resume-cloud-project-using-infrastructure-as-code)
+  * [Chapter 1: Create a resume website with AWS Management Console](#chapter-1-create-a-project-with-aws-management-console)
+  * [Chapter 2: Will be soon ...](#chapter-2-enhance-resume-cloud-project-using-infrastructure-as-code-will-be-soon)
   
 ![cloud-resume-challenge](assets/cloud-resume-challenge.png)
 
@@ -104,7 +104,7 @@ For my website I personally used [HTML5 UP](https://html5up.net/) template.
 
 * Build your website using some IDE
 
-6. When finished we'll explain hot to download your website template to AWS s3 bucket
+6. When finished we'll explain how to download your website template to AWS s3 bucket
 
 * Zip the project code of your website for use in `AWS S3`.
 
@@ -114,6 +114,6 @@ For my website I personally used [HTML5 UP](https://html5up.net/) template.
 
 `Are you interested in this? :) Let's get down to writing your cloud resume.`
 
-### [Chapter 1: Create a project with AWS Management Console](info/chapter_1.md)
+### [Chapter 1: Create a resume website with AWS Management Console](info/chapter_1.md)
 
-### [Chapter 2: Enhance Resume Cloud Project Using Infrastructure as Code](info/chapter_2.md)
+### [Chapter 2: Enhance Resume Cloud Project Using Infrastructure as Code (Will be soon ...)](info/chapter_2.md)
